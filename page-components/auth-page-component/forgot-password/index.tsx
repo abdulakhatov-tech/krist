@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 
 import FormInput from "@/components/form-input";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
 import useForgotPasswordFeatures from "./featues";
 
-const ForgotPasswordPageComponent = () => {
+const ForgotPasswordPageComponent: React.FC = () => {
 	const { form, hasErrors, handleFormSubmit } = useForgotPasswordFeatures();
 	const { isSubmitting } = form.formState;
 

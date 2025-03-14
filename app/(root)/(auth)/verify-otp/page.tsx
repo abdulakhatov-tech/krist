@@ -1,7 +1,7 @@
-import React from "react";
+import VerifyOTPPageComponent from "@/page-components/auth-page-component/verify-otp";
 
 const VerifyOTP = () => {
-	return <div>VerifyOTP</div>;
+	return <VerifyOTPPageComponent />;
 };
 
 export default VerifyOTP;

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type React from "react";
 
-const PAGE_TITLES: Record<string, Record<string, string>> = {
+const PAGE_TITLES: Record<string, { title: string; description: string }> = {
 	"/sign-in": {
 		title: "Welcome 👋",
 		description: "Please login here",
@@ -15,38 +15,45 @@ const PAGE_TITLES: Record<string, Record<string, string>> = {
 		description: "Please enter details",
 	},
 	"/forgot-password": {
-		title: "Forgot password",
+		title: "Forgot Password",
 		description:
-			"Enter your registered phone number or email address. we'll send you a code to reset your password.",
+			"Enter your registered phone number or email address. We'll send you a code to reset your password.",
 	},
 	"/verify-otp": {
 		title: "Enter OTP",
-		description:
-			"We have shared a code of your registered email address jack@gmail.com",
+		description: "We have sent an OTP code to your registered identifier.",
 	},
 };
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 	const pathname = usePathname();
-	const title = PAGE_TITLES[pathname].title || "";
-	const description = PAGE_TITLES[pathname].description || "";
+	const { title = "", description = "" } = PAGE_TITLES[pathname] || {};
 	const isSignUp = pathname === "/sign-up";
 
+	const backLink =
+		pathname === "/forgot-password"
+			? "/sign-in"
+			: pathname === "/verify-otp"
+				? "/forgot-password"
+				: null;
+
 	return (
-		<div className="w-full min-h-screen flex items-center justify-center">
-			<div className="flex flex-col gap-8 max-w-[600px] min-w-[500px]">
-				{pathname === "/forgot-password" && (
+		<div className="w-full min-h-screen flex items-center justify-center container">
+			<div className="flex flex-col gap-8 max-w-[450px] w-full md:min-w-[450px] px-4">
+				{/* Back Button */}
+				{backLink && (
 					<Link
-						href="/sign-in"
+						href={backLink}
 						className="flex items-center gap-2 hover:text-blue-500"
 					>
-						<ArrowLeft />{" "}
+						<ArrowLeft />
 						<h4 className="text-md font-normal leading-[100%] hover:underline">
 							Back
 						</h4>
 					</Link>
 				)}
 
+				{/* Title & Description */}
 				<div className="flex flex-col gap-3">
 					<h1 className="text-3xl font-bold leading-[100%]">{title}</h1>
 					<p className="text-md font-normal leading-[100%] text-gray-500">
@@ -54,9 +61,11 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 					</p>
 				</div>
 
+				{/* Auth Form */}
 				{children}
 
-				{(pathname === "/sign-up" || pathname === "/sign-in") && (
+				{/* Sign Up / Sign In Link */}
+				{["/sign-up", "/sign-in"].includes(pathname) && (
 					<p className="text-lg leading-6 font-normal tracking-wide text-center">
 						{isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
 						<Link
