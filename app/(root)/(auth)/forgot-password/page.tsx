@@ -1,7 +1,7 @@
-import React from "react";
+import ForgotPasswordPageComponent from "@/page-components/auth-page-component/forgot-password";
 
 const ForgotPassword = () => {
-	return <div>ForgotPassword</div>;
+	return <ForgotPasswordPageComponent />;
 };
 
 export default ForgotPassword;
