@@ -22,6 +22,11 @@ export interface IVerifyOTPPayload {
 	identifier: string;
 }
 
+export interface IResetPasswordPayload {
+	newPassword: string;
+	identifier: string;
+}
+
 export interface IAuthResponse {
 	success: boolean;
 	message: string;
@@ -42,6 +47,11 @@ export interface IForgotPasswordResponse {
 }
 
 export interface IVerifyOTPResponse {
+	success: boolean;
+	message: string;
+}
+
+export interface IResetPasswordResponse {
 	success: boolean;
 	message: string;
 }

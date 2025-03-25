@@ -6,6 +6,8 @@ import type {
 	IAuthResponse,
 	IForgotPasswordPayload,
 	IForgotPasswordResponse,
+	IResetPasswordPayload,
+	IResetPasswordResponse,
 	ISignInPayload,
 	ISignUpPayload,
 	IVerifyOTPPayload,
@@ -54,6 +56,16 @@ const createAuthService = (
 	async verifyOTP(payload: IVerifyOTPPayload): Promise<IVerifyOTPResponse> {
 		const { data } = await axiosInstance.post<IVerifyOTPResponse>(
 			"/auth/verify-otp",
+			payload,
+		);
+		return data;
+	},
+
+	async resetPassword(
+		payload: IResetPasswordPayload,
+	): Promise<IResetPasswordResponse> {
+		const { data } = await axiosInstance.post<IResetPasswordResponse>(
+			"/auth/reset-password",
 			payload,
 		);
 		return data;

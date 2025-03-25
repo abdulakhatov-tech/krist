@@ -46,7 +46,7 @@ const initializeAxios = (
 		(error: AxiosError) => {
 			if (error.response?.status === 401 || error.response?.status === 403) {
 				signOut();
-				router.push("/auth/sign-in");
+				router.push("/sign-in");
 			}
 
 			return Promise.reject(error);

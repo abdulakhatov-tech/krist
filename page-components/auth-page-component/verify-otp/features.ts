@@ -58,9 +58,15 @@ const useVerifyOTPFeatures = () => {
 		values: z.infer<typeof verifyOTPFormSchema>,
 	) => {
 		try {
+			const identifier = localStorage.getItem("identifier") as string;
+
+			if (!identifier) {
+				router.push("/forgot-password");
+			}
+
 			const { success, message } = await verifyOTP({
 				otpCode: values.otpCode,
-				identifier: "islomjonabdulakhatov6975@gmail.com",
+				identifier,
 			});
 
 			if (success) {

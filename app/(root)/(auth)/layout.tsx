@@ -23,6 +23,10 @@ const PAGE_TITLES: Record<string, { title: string; description: string }> = {
 		title: "Enter OTP",
 		description: "We have sent an OTP code to your registered identifier.",
 	},
+	"/reset-password": {
+		title: "Reset Password",
+		description: "Enter your new password to regain access to your account.",
+	},
 };
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
@@ -35,7 +39,9 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 			? "/sign-in"
 			: pathname === "/verify-otp"
 				? "/forgot-password"
-				: null;
+				: pathname === "/reset-password"
+					? "/sign-in"
+					: null;
 
 	return (
 		<div className="w-full min-h-screen flex items-center justify-center container">

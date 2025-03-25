@@ -31,13 +31,13 @@ const useForgotPasswordFeatures = () => {
 				toast(message || "Send you one-time OTP code!");
 				localStorage.setItem("otp_code", JSON.stringify(data));
 
+				localStorage.setItem("identifier", values.identifier);
 				reset();
 				router.push("/verify-otp");
 			} else {
 				toast("Failed to send OTP code!");
 			}
 		} catch (error) {
-			console.log("ERROR -> :", error);
 			if (error instanceof AxiosError) {
 				const errorMessage = error.response?.data?.message;
 				toast(errorMessage || "Failed to send OTP code!");
