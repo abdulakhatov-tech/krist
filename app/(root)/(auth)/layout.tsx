@@ -39,7 +39,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
 	return (
 		<div className="w-full min-h-screen flex items-center justify-center container">
-			<div className="flex flex-col gap-8 max-w-[450px] w-full md:min-w-[450px] px-4">
+			<div className="flex flex-col gap-6 md:gap-8 max-w-[450px] w-full md:min-w-[500px] px-4">
 				{/* Back Button */}
 				{backLink && (
 					<Link
@@ -56,7 +56,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 				{/* Title & Description */}
 				<div className="flex flex-col gap-3">
 					<h1 className="text-3xl font-bold leading-[100%]">{title}</h1>
-					<p className="text-md font-normal leading-[100%] text-gray-500">
+					<p className="hidden md:block text-md font-normal leading-[100%] text-gray-500">
 						{description}
 					</p>
 				</div>
