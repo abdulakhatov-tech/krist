@@ -4,8 +4,12 @@ import useSignOut from "react-auth-kit/hooks/useSignOut";
 import { getServerAxios, useAxios } from "../api/axios.service";
 import type {
 	IAuthResponse,
+	IForgotPasswordPayload,
+	IForgotPasswordResponse,
 	ISignInPayload,
 	ISignUpPayload,
+	IVerifyOTPPayload,
+	IVerifyOTPResponse,
 } from "./auth.interface";
 
 // Auth service factory
@@ -35,6 +39,24 @@ const createAuthService = (
 		} finally {
 			signOut?.();
 		}
+	},
+
+	async forgotPassword(
+		payload: IForgotPasswordPayload,
+	): Promise<IForgotPasswordResponse> {
+		const { data } = await axiosInstance.post<IForgotPasswordResponse>(
+			"/auth/forgot-password",
+			payload,
+		);
+		return data;
+	},
+
+	async verifyOTP(payload: IVerifyOTPPayload): Promise<IVerifyOTPResponse> {
+		const { data } = await axiosInstance.post<IVerifyOTPResponse>(
+			"/auth/verify-otp",
+			payload,
+		);
+		return data;
 	},
 });
 

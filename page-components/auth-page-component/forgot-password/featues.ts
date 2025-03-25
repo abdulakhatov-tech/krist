@@ -1,9 +1,16 @@
 import { forgotPasswordFormSchema } from "@/schema-validators/auth/fogotPasswordFormSchema";
+import { useAuthService } from "@/services/auth/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import type { z } from "zod";
 
 const useForgotPasswordFeatures = () => {
+	const router = useRouter();
+	const { forgotPassword } = useAuthService();
+
 	const form = useForm<z.infer<typeof forgotPasswordFormSchema>>({
 		resolver: zodResolver(forgotPasswordFormSchema),
 		defaultValues: {
@@ -18,9 +25,23 @@ const useForgotPasswordFeatures = () => {
 		values: z.infer<typeof forgotPasswordFormSchema>,
 	) => {
 		try {
-			console.log(values, "values");
+			const { success, message, data } = await forgotPassword(values);
+
+			if (success) {
+				toast(message || "Send you one-time OTP code!");
+				localStorage.setItem("otp_code", JSON.stringify(data));
+
+				reset();
+				router.push("/verify-otp");
+			} else {
+				toast("Failed to send OTP code!");
+			}
 		} catch (error) {
 			console.log("ERROR -> :", error);
+			if (error instanceof AxiosError) {
+				const errorMessage = error.response?.data?.message;
+				toast(errorMessage || "Failed to send OTP code!");
+			}
 		}
 	};
 

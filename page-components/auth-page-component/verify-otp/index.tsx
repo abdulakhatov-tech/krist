@@ -19,11 +19,13 @@ import {
 } from "@/components/ui/input-otp";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/tools";
+import { useEffect } from "react";
 import { SuccessModal } from "./customs";
 import useVerifyOTPFeatures from "./features";
 
 const VerifyOTPPageComponent: React.FC = () => {
-	const { form, hasErrors, handleFormSubmit } = useVerifyOTPFeatures();
+	const { form, hasErrors, handleFormSubmit, otpData, timeLeft, formatTime } =
+		useVerifyOTPFeatures();
 	const { isSubmitting } = form.formState;
 
 	return (
@@ -38,7 +40,34 @@ const VerifyOTPPageComponent: React.FC = () => {
 						name="otpCode"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>One-Time Password</FormLabel>
+								<FormLabel>
+									OTP Code:{" "}
+									<strong
+										onClick={() => {
+											if (otpData?.otpCode) {
+												navigator.clipboard.writeText(otpData.otpCode);
+											}
+										}}
+										onKeyDown={(e) => {
+											if (
+												(e.key === "Enter" || e.key === " ") &&
+												otpData?.otpCode
+											) {
+												navigator.clipboard.writeText(otpData.otpCode);
+											}
+										}}
+										className="cursor-pointer text-blue-500 hover:underline text-md"
+									>
+										{otpData?.otpCode || "N/A"}
+									</strong>{" "}
+									{timeLeft > 0 ? (
+										<>
+											expires in <strong>{formatTime(timeLeft)}</strong>
+										</>
+									) : (
+										<span className="text-red-500"> OTP Expired</span>
+									)}
+								</FormLabel>
 								<FormControl>
 									<InputOTP maxLength={6} {...field}>
 										<InputOTPGroup className="w-full">

@@ -13,6 +13,15 @@ export interface ISignInPayload {
 	rememberMe?: boolean | undefined;
 }
 
+export interface IForgotPasswordPayload {
+	identifier: string;
+}
+
+export interface IVerifyOTPPayload {
+	otpCode: string;
+	identifier: string;
+}
+
 export interface IAuthResponse {
 	success: boolean;
 	message: string;
@@ -21,4 +30,18 @@ export interface IAuthResponse {
 		refreshToken: string;
 		user: IUser; // Replace with your user type
 	};
+}
+
+export interface IForgotPasswordResponse {
+	success: boolean;
+	message: string;
+	data: {
+		otpCode: string;
+		expiresIn: number;
+	};
+}
+
+export interface IVerifyOTPResponse {
+	success: boolean;
+	message: string;
 }
