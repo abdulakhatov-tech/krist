@@ -10,7 +10,7 @@ export interface ISignUpPayload {
 export interface ISignInPayload {
 	identifier: string;
 	password: string;
-	rememberMe?: boolean;
+	rememberMe?: boolean | undefined;
 }
 
 export interface IAuthResponse {
