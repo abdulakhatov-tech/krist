@@ -11,7 +11,7 @@ import { BannerItem } from "./customs";
 
 const Banners: React.FC = () => {
 	return (
-		<div className="py-4 md:pt-10">
+		<div>
 			<Carousel>
 				<CarouselContent>
 					{banners?.map((banner) => (

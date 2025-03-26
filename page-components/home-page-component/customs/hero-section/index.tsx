@@ -5,7 +5,7 @@ const HeroSection: React.FC = () => {
 	return (
 		<section>
 			<div className="container">
-				<div className="grid md:grid-cols-[300px_1fr]">
+				<div className="grid md:grid-cols-[300px_1fr] gap-2 py-4 md:pt-10">
 					{/* Categories */}
 					<CategoryList />
 
