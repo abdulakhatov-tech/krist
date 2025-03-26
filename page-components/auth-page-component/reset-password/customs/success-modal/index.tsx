@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -8,17 +9,26 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger,
 } from "@/components/ui/dialog";
+import { setResetPasswordModalVisibility } from "@/lib/features/modals/resetPasswordSuccessModalSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import type { RootState } from "@/lib/store";
 import { Check } from "lucide-react";
-import Link from "next/link";
 
 const SuccessModal = () => {
+	const router = useRouter();
+	const open = useAppSelector(
+		(state: RootState) => state.resetPasswordSuccessModalSlice.open,
+	);
+	const dispatch = useAppDispatch();
+
+	const handleClick = () => {
+		router.push("/sign-in");
+		dispatch(setResetPasswordModalVisibility(false));
+	};
+
 	return (
-		<Dialog>
-			{/* <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger> */}
+		<Dialog open={open}>
 			<DialogContent>
 				<DialogHeader>
 					<div className="p-3 bg-[#1311180d] w-fit rounded-full mx-auto mb-5 mt-6">
@@ -39,11 +49,9 @@ const SuccessModal = () => {
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter className="mt-[30px]">
-					<Link href="/sign-in" className="w-full">
-						<Button type="submit" className="w-full h-12">
-							Back to Login
-						</Button>
-					</Link>
+					<Button type="submit" className="w-full h-12" onClick={handleClick}>
+						Back to Login
+					</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

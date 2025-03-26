@@ -1,3 +1,5 @@
+import { setResetPasswordModalVisibility } from "@/lib/features/modals/resetPasswordSuccessModalSlice";
+import { useAppDispatch } from "@/lib/hooks";
 import { resetPasswordFormSchema } from "@/schema-validators/auth/resetPasswordFormSchema";
 import { useAuthService } from "@/services/auth/auth.service";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +11,7 @@ import type { z } from "zod";
 
 const useResetPasswordFeatures = () => {
 	const router = useRouter();
+	const dispatch = useAppDispatch();
 	const { resetPassword } = useAuthService();
 
 	const form = useForm<z.infer<typeof resetPasswordFormSchema>>({
@@ -39,10 +42,12 @@ const useResetPasswordFeatures = () => {
 
 			if (success) {
 				toast(message || "New Password reset successfull!");
+				reset();
+
+				dispatch(setResetPasswordModalVisibility(true));
 			}
 
 			localStorage.removeItem("identifier");
-			router.push("/sign-in");
 		} catch (error) {
 			if (error instanceof AxiosError) {
 				const errorMessage = error.response?.data?.message;

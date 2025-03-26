@@ -3,6 +3,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import AuthProvider from "react-auth-kit";
 import createStore from "react-auth-kit/createStore";
+import StoreProvider from "./StoreProvider";
 
 export const authStore = createStore({
 	authName: "_auth",
@@ -18,8 +19,10 @@ export const authStore = createStore({
 export function Providers({ children }: { children: React.ReactNode }) {
 	return (
 		<AuthProvider store={authStore}>
-			{children}
-			<Toaster />
+			<StoreProvider>
+				{children}
+				<Toaster />
+			</StoreProvider>
 		</AuthProvider>
 	);
 }
