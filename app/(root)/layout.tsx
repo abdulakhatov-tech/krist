@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/navbar";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import type React from "react";
@@ -15,7 +16,12 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 		}
 	}, [isAuthenticated, router]);
 
-	return children;
+	return (
+		<>
+			<Navbar />
+			{children}
+		</>
+	);
 };
 
 export default RootLayout;
