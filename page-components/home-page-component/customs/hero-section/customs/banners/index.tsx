@@ -1,3 +1,4 @@
+import Autoplay from "embla-carousel-autoplay";
 import type React from "react";
 
 import {
@@ -12,7 +13,16 @@ import { BannerItem } from "./customs";
 const Banners: React.FC = () => {
 	return (
 		<div>
-			<Carousel>
+			<Carousel
+				plugins={[
+					Autoplay({
+						delay: 2500,
+					}),
+				]}
+				opts={{
+					loop: true,
+				}}
+			>
 				<CarouselContent>
 					{banners?.map((banner) => (
 						<BannerItem key={banner?._id} banner={banner} />
