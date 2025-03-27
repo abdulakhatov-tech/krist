@@ -10,10 +10,10 @@ import { CategoryAccordionItem } from "./customs";
 import Loading from "./loading";
 
 const CategoryList: React.FC = () => {
-	const { data: categories, isLoading, isError, error } = useCategories();
+	const { data: categories, isLoading } = useCategories();
 
 	return (
-		<aside className="pr-4 max-h-[400px] overflow-y-auto bg-accent py-2">
+		<aside className="max-h-[400px] overflow-y-auto bg-accent p-2 h-full">
 			<Accordion
 				type="multiple"
 				className={cn(isLoading ? "gap-2" : "gap-0", "w-full flex flex-col ")}
