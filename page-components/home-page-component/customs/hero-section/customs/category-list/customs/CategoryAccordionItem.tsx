@@ -23,7 +23,7 @@ const CategoryAccordionItem: React.FC<{ category: ICategoryItem }> = ({
 							<span className="text-lg font-normal">{category.name}</span>
 						</div>
 					</AccordionTrigger>
-					<AccordionContent className="pl-3 py-1">
+					<AccordionContent className="pl-3 pt-1 pb-2">
 						{category?.subcategories && (
 							<SubCategoryList subCategories={category?.subcategories} />
 						)}
