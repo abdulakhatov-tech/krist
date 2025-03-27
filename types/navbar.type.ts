@@ -10,4 +10,5 @@ export type NavActionType = {
 	_id: string;
 	Icon: ComponentType<SVGProps<SVGSVGElement>>;
 	title: string;
+	type: "search" | "favorites" | "shopping-cart";
 };

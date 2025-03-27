@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
 							<Link href="/profile">
 								<Avatar className="w-10 h-10">
 									<AvatarImage src={user?.profilePhoto as string} />
-									<AvatarFallback className="text-lg bg-gray-200">
+									<AvatarFallback className="text-[16px] bg-gray-200">
 										{user?.firstName?.[0]}.{user?.lastName?.[0]}
 									</AvatarFallback>
 								</Avatar>

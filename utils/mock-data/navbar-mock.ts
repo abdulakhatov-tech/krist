@@ -30,15 +30,18 @@ export const navActions: NavActionType[] = [
 		_id: "1",
 		Icon: Search,
 		title: "Search",
+		type: "search",
 	},
 	{
 		_id: "2",
 		Icon: Heart,
 		title: "Favorites",
+		type: "favorites",
 	},
 	{
 		_id: "3",
 		Icon: ShoppingBasket,
 		title: "Shopping Cart",
+		type: "shopping-cart",
 	},
 ];

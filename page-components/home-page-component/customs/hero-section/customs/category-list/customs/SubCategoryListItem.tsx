@@ -1,5 +1,6 @@
-import type { ISubCategoryItem } from "@/interfaces/category.interface";
 import Link from "next/link";
+
+import type { ISubCategoryItem } from "@/interfaces/category.interface";
 
 const SubCategoryListItem: React.FC<{ subCategory: ISubCategoryItem }> = ({
 	subCategory,
