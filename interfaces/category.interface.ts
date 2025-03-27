@@ -1,12 +1,14 @@
 export interface ICategoryItem {
-	_id: string;
-	title: string;
+	id: string;
+	name: string;
 	slug: string;
-	children?: ISubCategoryItem[] | null;
+	image_url: string | null;
+	subcategories?: ISubCategoryItem[] | null;
 }
 
 export interface ISubCategoryItem {
-	_id: string;
-	title: string;
+	id: string;
+	name: string;
 	slug: string;
+	image_url: string | null;
 }

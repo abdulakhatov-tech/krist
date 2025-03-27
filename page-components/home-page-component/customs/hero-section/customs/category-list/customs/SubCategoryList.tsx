@@ -7,7 +7,7 @@ const SubCategoryList: React.FC<{ subCategories: ISubCategoryItem[] }> = ({
 	return (
 		<ul>
 			{subCategories.map((subCategory) => (
-				<SubCategoryListItem key={subCategory._id} subCategory={subCategory} />
+				<SubCategoryListItem key={subCategory.id} subCategory={subCategory} />
 			))}
 		</ul>
 	);

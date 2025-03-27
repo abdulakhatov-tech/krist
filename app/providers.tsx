@@ -1,8 +1,11 @@
 "use client";
 
-import { Toaster } from "@/components/ui/sonner";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AuthProvider from "react-auth-kit";
 import createStore from "react-auth-kit/createStore";
+
+import { Toaster } from "@/components/ui/sonner";
 import StoreProvider from "./StoreProvider";
 
 export const authStore = createStore({
@@ -16,13 +19,18 @@ export const authStore = createStore({
 			: process.env.NODE_ENV === "production",
 });
 
+const queryClient = new QueryClient();
+
 export function Providers({ children }: { children: React.ReactNode }) {
 	return (
 		<AuthProvider store={authStore}>
-			<StoreProvider>
-				{children}
-				<Toaster />
-			</StoreProvider>
+			<QueryClientProvider client={queryClient}>
+				<StoreProvider>
+					{children}
+					<ReactQueryDevtools initialIsOpen={false} />
+					<Toaster />
+				</StoreProvider>
+			</QueryClientProvider>
 		</AuthProvider>
 	);
 }
