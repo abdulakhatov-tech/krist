@@ -3,7 +3,7 @@ export interface ICategoryItem {
 	name: string;
 	slug: string;
 	image_url: string | null;
-	subcategories?: ISubCategoryItem[] | null;
+	subcategories: ISubCategoryItem[];
 }
 
 export interface ISubCategoryItem {

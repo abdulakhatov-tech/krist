@@ -11,3 +11,15 @@ export const useCategories = () => {
 		retry: 2, // Retry twice on failure
 	});
 };
+
+export const useSubCategoriesByCategory = (categorySlug: string) => {
+	const { fetchSubCategoriesByCategory } = useCategoriesService();
+
+	return useQuery({
+		queryKey: ["subcategories", categorySlug],
+		queryFn: () => fetchSubCategoriesByCategory(categorySlug),
+		enabled: !!categorySlug,
+		staleTime: 1000 * 60 * 5,
+		retry: 2,
+	});
+};
