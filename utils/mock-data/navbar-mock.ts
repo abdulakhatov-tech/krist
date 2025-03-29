@@ -23,6 +23,11 @@ export const navItems: NavItemType[] = [
 		path: "/contact-us",
 		title: "Contact Us",
 	},
+	{
+		_id: "5",
+		path: "/dashboard",
+		title: "Dashboard",
+	},
 ];
 
 export const navActions: NavActionType[] = [
